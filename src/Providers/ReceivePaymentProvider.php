@@ -87,6 +87,7 @@ class ReceivePaymentProvider extends PaytmWalletProvider{
 		}else{
 			$data['txnToken'] = '';
 			$data['message'] = "Something went wrong";
+			$data['resultMsg'] = $response['body']['resultInfo']['resultMsg'];
 		}
 		$data['apiurl'] = $apiURL;
 		$checkout_url = str_replace('MID',$this->merchant_id, getPaytmURL($this->checkout_js_url,$this->environment));

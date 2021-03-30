@@ -241,6 +241,12 @@ class PaytmController extends Controller
            success:function(data) {
             $('.paytm-pg-loader').show();
             $('.paytm-overlay').show();
+	    if(data.txnToken == ""){
+                alert(data.message);
+                $('.paytm-pg-loader').hide();
+                $('.paytm-overlay').hide();
+                return false;
+            }
             invokeBlinkCheckoutPopup(data.orderId,data.txnToken,data.amount)
            }
         });
@@ -265,7 +271,7 @@ class PaytmController extends Controller
                     {
                       $('.paytm-pg-loader').hide();
                       $('.paytm-overlay').hide();
-                      location.reload();
+                      //location.reload();
                     }
                     console.log("notify merchant about the payment state");
                 } 
@@ -286,11 +292,6 @@ Route::get('/initiate','PaytmController@initiate')->name('initiate.payment');
 Route::post('/payment','PaytmController@pay')->name('make.payment');
 Route::post('/payment/status', 'PaytmController@paymentCallback')->name('status');
 
-```
-Make sure the `callback_url` you have mentioned while receiving payment is `post` on your `routes.php` file, Example see below:
-
-```php
-Route::post('/payment/status', 'OrderController@paymentCallback');
 ```
 Important: The `callback_url` must not be csrf protected [Check out here to how to do that](https://laracasts.com/discuss/channels/general-discussion/l5-disable-csrf-middleware-on-certain-routes)
 
