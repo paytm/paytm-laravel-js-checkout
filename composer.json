@@ -1,0 +1,13 @@
+{
+    "name": "paytm/js-checkout",
+    "description": "Paytm JS Chekout for laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Integartion Dev",
+            "email": "integration.dev@paytm.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
