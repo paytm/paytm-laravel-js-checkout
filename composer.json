@@ -9,5 +9,20 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Paytm\\JsCheckout\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Paytm\\JsCheckout\\PaytmWalletServiceProvider"
+            ],
+            "aliases": {
+                "PayWallet": "Paytm\\JsCheckout\\Facades\\PaytmWallet"
+            }
+        }
+    }
 }
