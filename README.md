@@ -13,7 +13,7 @@ When composer installs Laravel Paytm Wallet library successfully, register the `
 ```php
 'providers' => [
     // Other service providers...
-    Paytm\JsCheckout\PaytmWalletServiceProvider::class,
+    Paytm\JsCheckout\PaytmServiceProvider::class,
 ],
 ```
 Also, add the `PaytmWallet` facade to the `aliases` array in your `app` configuration file:
@@ -21,7 +21,7 @@ Also, add the `PaytmWallet` facade to the `aliases` array in your `app` configur
 ```php
 'aliases' => [
     // Other aliases
-    'PaytmWallet' => Paytm\JsCheckout\Facades\PaytmWallet::class,
+    'Paytm' => Paytm\JsCheckout\Facades\Paytm::class,
 ],
 ```
 #### Add the paytm credentials to the `.env` file
@@ -39,7 +39,7 @@ PAYTM_INDUSTRY_TYPE=YOUR_INDUSTRY_TYPE_HERE
 On your `config/services.php` add the following configuration
 
 ```php
-'paytm-wallet' => [
+'paytm' => [
         'env' => env('PAYTM_ENVIRONMENT'), // values : (local | production)
         'merchant_id' => env('PAYTM_MERCHANT_ID'),
         'merchant_key' => env('PAYTM_MERCHANT_KEY'),
@@ -74,7 +74,7 @@ return [
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use PaytmWallet;
+use Paytm;
 
 class PaytmController extends Controller
 {
@@ -96,7 +96,7 @@ class PaytmController extends Controller
             'order_id' => rand(1,1000) //Order id
         ];
 
-        $payment = PaytmWallet::with('receive');
+        $payment = Paytm::with('receive');
 
         $payment->prepare([
             'order' => $userData['order_id'], 
@@ -112,7 +112,7 @@ class PaytmController extends Controller
 
     public function paymentCallback()
     {
-        $transaction = PaytmWallet::with('receive');
+        $transaction = Paytm::with('receive');
 
         $response = $transaction->response();
         
@@ -295,6 +295,5 @@ Route::post('/payment/status', 'PaytmController@paymentCallback')->name('status'
 ```
 Important: The `callback_url` must not be csrf protected [Check out here to how to do that](https://laracasts.com/discuss/channels/general-discussion/l5-disable-csrf-middleware-on-certain-routes)
 
-That's all folks!
 
 

@@ -18,10 +18,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Paytm\\JsCheckout\\PaytmWalletServiceProvider"
+                "Paytm\\JsCheckout\\PaytmServiceProvider"
             ],
             "aliases": {
-                "PayWallet": "Paytm\\JsCheckout\\Facades\\PaytmWallet"
+                "Pay": "Paytm\\JsCheckout\\Facades\\Paytm"
             }
         }
     }
