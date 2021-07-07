@@ -40,7 +40,7 @@ On your `config/services.php` add the following configuration
 
 ```php
 'paytm' => [
-        'env' => env('PAYTM_ENVIRONMENT'), // values : (local | production)
+        'env' => env('PAYTM_ENVIRONMENT'), // values : (staging | production)
         'merchant_id' => env('PAYTM_MERCHANT_ID'),
         'merchant_key' => env('PAYTM_MERCHANT_KEY'),
         'merchant_website' => env('PAYTM_MERCHANT_WEBSITE'),
