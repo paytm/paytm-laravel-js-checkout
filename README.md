@@ -8,7 +8,7 @@ To get started add the following package to your `composer.json` file using this
 ## Configuring
 **Note: For Laravel 5.5 and above auto-discovery takes care of below configuration.**
 
-When composer installs Laravel Paytm Wallet library successfully, register the `Paytm\JsCheckout\PaytmWalletServiceProvider` in your `config/app.php` configuration file.
+When composer installs Laravel Paytm Wallet library successfully, register the `Paytm\JsCheckout\PaytmServiceProvider` in your `config/app.php` configuration file.
 
 ```php
 'providers' => [
@@ -16,7 +16,7 @@ When composer installs Laravel Paytm Wallet library successfully, register the `
     Paytm\JsCheckout\PaytmServiceProvider::class,
 ],
 ```
-Also, add the `PaytmWallet` facade to the `aliases` array in your `app` configuration file:
+Also, add the `Paytm` facade to the `aliases` array in your `app` configuration file:
 
 ```php
 'aliases' => [
