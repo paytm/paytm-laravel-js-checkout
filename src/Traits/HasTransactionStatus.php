@@ -13,21 +13,21 @@ trait HasTransactionStatus {
     }
 
     public function isFailed(){
-        if ($this->response['STATUS'] == PaytmWallet::STATUS_FAILURE) {
+        if ($this->response['STATUS'] == Paytm::STATUS_FAILURE) {
             return true;
         }
         return false;
     }
 
     public function isSuccessful(){
-        if($this->response['STATUS'] == PaytmWallet::STATUS_SUCCESSFUL){
+        if($this->response['STATUS'] == Paytm::STATUS_SUCCESSFUL){
             return true;
         }
         return false;
     }
 
     public function isPending(){
-        if($this->response['STATUS'] == PaytmWallet::STATUS_PENDING){
+        if($this->response['STATUS'] == Paytm::STATUS_PENDING){
             return true;
         }
         return false;
