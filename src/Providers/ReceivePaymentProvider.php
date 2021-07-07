@@ -1,11 +1,11 @@
 <?php
 
 namespace Paytm\JsCheckout\Providers;
-use Paytm\JsCheckout\Facades\PaytmWallet;
+use Paytm\JsCheckout\Facades\Paytm;
 use Paytm\JsCheckout\Traits\HasTransactionStatus;
 use Illuminate\Http\Request;
 
-class ReceivePaymentProvider extends PaytmWalletProvider{
+class ReceivePaymentProvider extends PaytmProvider{
 	use HasTransactionStatus;
 	
 	private $parameters = null;

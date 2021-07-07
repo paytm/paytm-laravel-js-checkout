@@ -26,7 +26,7 @@ Also, add the `PaytmWallet` facade to the `aliases` array in your `app` configur
 ```
 #### Add the paytm credentials to the `.env` file
 ```bash
-PAYTM_ENVIRONMENT=local
+PAYTM_ENVIRONMENT=staging
 PAYTM_MERCHANT_ID=YOUR_MERCHANT_ID_HERE
 PAYTM_MERCHANT_KEY=YOUR_SECRET_KEY_HERE
 PAYTM_MERCHANT_WEBSITE=YOUR_MERCHANT_WEBSITE
