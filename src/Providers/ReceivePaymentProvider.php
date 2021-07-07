@@ -9,7 +9,7 @@ class ReceivePaymentProvider extends PaytmProvider{
 	use HasTransactionStatus;
 	
 	private $parameters = null;
-	private $view = 'paytmwallet::transact';
+	private $view = 'paytm::transact';
 
     public function prepare($params = array()){
 		$defaults = [

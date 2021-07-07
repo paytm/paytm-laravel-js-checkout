@@ -1,12 +1,12 @@
 <?php
 
 namespace Paytm\JsCheckout\Traits;
-use Paytm\JsCheckout\Facades\PaytmWallet;
+use Paytm\JsCheckout\Facades\Paytm;
 
 trait HasTransactionStatus {
 
     public function isOpen(){
-        if ($this->response['STATUS'] == PaytmWallet::STATUS_OPEN){
+        if ($this->response['STATUS'] == Paytm::STATUS_OPEN){
             return true;
         }
         return false;
