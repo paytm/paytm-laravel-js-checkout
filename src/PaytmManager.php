@@ -23,46 +23,6 @@ class PaytmManager extends Manager implements Contracts\Factory{
 			$this->config
 			);
 	}
-
-	protected function createStatusDriver(){
-		$this->config = $this->app['config']['services.paytm'];
-		return $this->buildProvider(
-			'Paytm\JsCheckout\Providers\StatusCheckProvider',
-			$this->config
-			);
-	}
-
-	protected function createBalanceDriver(){
-		$this->config = $this->app['config']['services.paytm'];
-		return $this->buildProvider(
-			'Paytm\JsCheckout\Providers\BalanceCheckProvider',
-			$this->config
-			);
-	}
-
-	protected function createAppDriver(){
-		$this->config = $this->app['config']['services.paytm'];
-		return $this->buildProvider(
-			'Paytm\JsCheckout\Providers\PaytmAppProvider',
-			$this->config
-			);
-	}
-
-	protected function createRefundDriver() {
-		$this->config = $this->app['config']['services.paytm'];
-		return $this->buildProvider(
-			'Paytm\JsCheckout\Providers\RefundPaymentProvider',
-			$this->config
-			);
-	}
-	
-	protected function createRefundStatusDriver(){
-		$this->config = $this->app['config']['services.paytm'];
-		return $this->buildProvider(
-			'Paytm\JsCheckout\Providers\RefundStatusCheckProvider',
-			$this->config
-			);
-	}
 	
 	public function getDefaultDriver(){
 		throw new \Exception('No driver was specified. - Laravel Paytm');

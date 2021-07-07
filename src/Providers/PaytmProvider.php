@@ -12,11 +12,7 @@ class PaytmProvider implements ProviderContract {
 	protected $request;
 	protected $response;
 	protected $paytm_txn_url;
-	protected $paytm_txn_status_url;
-	protected $paytm_refund_url;
-	protected $paytm_refund_status_url;
-	protected $paytm_balance_check_url;
-
+	
 	protected $merchant_key;
 	protected $merchant_id;
 	protected $merchant_website;
@@ -31,9 +27,11 @@ class PaytmProvider implements ProviderContract {
 		$this->request = $request;
 		
 		if ($config['env'] == 'production') {
+			$env= 1;
 			$domain = 'securegw.paytm.in';
 		}else{
 			$domain = 'securegw-stage.paytm.in';
+			$env= 0;
 		}
 		$this->paytm_txn_url = 'https://'.$domain.'/theia/processTransaction';
 		$this->paytm_txn_status_url = 'https://'.$domain.'/merchant-status/getTxnStatus';
@@ -50,14 +48,37 @@ class PaytmProvider implements ProviderContract {
 		$this->inititate_transaction_url = "theia/api/v1/initiateTransaction/";
 		$this->environment = ($config['env']=="production")?1:0;
 		$this->checkout_js_url	= "merchantpgpui/checkoutjs/merchants/MID.js";
+		$this->env = $env;
 	}
 
-	public function response(){
+	public function response(){ 
 		$checksum = $this->request->get('CHECKSUMHASH');
 		unset($_POST['CHECKSUMHASH']);
 		$result =  verifySignature($_POST, $this->merchant_key, $checksum);
 		
 		if($result==1){
+			$reqParams = array(
+						"MID" 		=> $this->merchant_id,
+						"ORDERID" 	=> $_POST['ORDERID']
+					);
+
+			$reqParams['CHECKSUMHASH'] = generateSignature($reqParams, $this->merchant_key);
+
+			/* number of retries untill cURL gets success */
+			$retry = 1;
+			do{
+				$postData = 'JsonData='.urlencode(json_encode($reqParams));
+				$resParams = executecUrl(getPaytmURL('order/status', $this->env), $postData);
+				$retry++;
+			} while(!$resParams['STATUS'] && $retry < 3);
+			/* number of retries untill cURL gets success */
+
+			if(!isset($resParams['STATUS'])){
+				$resParams = $_POST;
+			}
+			if($resParams['STATUS'] == 'TXN_SUCCESS') {
+				return $this->response = $this->request->post();
+			}
 		    return $this->response = $this->request->post();
 		}
         	throw new \Exception('Invalid checksum');
