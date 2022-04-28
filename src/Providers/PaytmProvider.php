@@ -77,9 +77,9 @@ class PaytmProvider implements ProviderContract {
 				$resParams = $_POST;
 			}
 			if($resParams['STATUS'] == 'TXN_SUCCESS') {
-				return $this->response = $this->request->post();
+				return $this->response = $_POST;
 			}
-		    return $this->response = $this->request->post();
+		    return $this->response = $_POST;
 		}
         	throw new \Exception('Invalid checksum');
 	}
