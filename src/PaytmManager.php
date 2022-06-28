@@ -16,7 +16,7 @@ class PaytmManager extends Manager implements Contracts\Factory{
 	}
 
 	protected function createReceiveDriver(){
-		$this->config = $this->app['config']['services.paytm'];
+		$this->config = $this->container['config']['services.paytm'];
 
 		return $this->buildProvider(
 			'Paytm\JsCheckout\Providers\ReceivePaymentProvider',
@@ -30,7 +30,7 @@ class PaytmManager extends Manager implements Contracts\Factory{
 
 	public function buildProvider($provider, $config){
 		return new $provider(
-			$this->app['request'],
+			$this->container['request'],
 			$config
 			);
 	}
